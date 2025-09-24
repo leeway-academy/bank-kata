@@ -8,7 +8,11 @@ public class AccountService {
     }
 
     public void deposit(int amount) {
-        account.addTransaction(new Transaction(amount));
+        account.addTransaction(buildTransaction(amount));
+    }
+
+    private Transaction buildTransaction(int amount) {
+        return new Transaction(amount);
     }
 
     public void withdraw(int amount) {
