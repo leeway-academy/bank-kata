@@ -10,7 +10,7 @@ public class Account {
         transactions.add(transaction);
     }
 
-    public List transactions() {
+    public List<Transaction> transactions() {
         return this.transactions;
     }
 
