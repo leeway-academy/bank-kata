@@ -1,5 +1,7 @@
 package com.leewayweb.bank;
 
+import com.leewayweb.bank.exception.InsufficientBalanceException;
+
 public class AccountService {
     private final Account account;
     private final TransactionFactory transactionFactory;
@@ -17,8 +19,12 @@ public class AccountService {
         return transactionFactory.buildTransaction(amount);
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(int amount) throws InsufficientBalanceException {
+        if (account.balance() < amount) {
+            throw new InsufficientBalanceException();
+        }
 
+        account.addTransaction(transactionFactory.buildTransaction(amount * -1));
     }
 
     public void printStatement() {
