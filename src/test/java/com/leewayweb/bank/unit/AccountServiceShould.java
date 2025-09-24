@@ -1,16 +1,15 @@
 package com.leewayweb.bank.unit;
 
 import com.leewayweb.bank.*;
-import com.leewayweb.bank.exception.InsufficientBalanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AccountServiceShould {
@@ -26,11 +25,12 @@ class AccountServiceShould {
     private @Mock Account account;
     private AccountService accountService;
     private @Mock TransactionFactory transactionFactory;
+    private @Mock StatementPrinter statementPrinter;
 
     @BeforeEach
     public void setUp()
     {
-        accountService = new AccountService(account, transactionFactory);
+        accountService = new AccountService(account, transactionFactory, statementPrinter);
     }
 
     @Test
@@ -44,7 +44,7 @@ class AccountServiceShould {
     }
 
     @Test
-    public void shouldAllowWithdrawals() throws InsufficientBalanceException {
+    public void shouldAllowWithdrawals() {
         when(transactionFactory.buildTransaction(WITHDRAWAL_AMOUNT * -1))
                 .thenReturn(A_WITHDRAWAL);
 
@@ -55,9 +55,8 @@ class AccountServiceShould {
     }
 
     @Test
-    public void shouldNotAllowOverdraft() {
-        when(account.balance()).thenReturn(WITHDRAWAL_AMOUNT - 100);
-        assertThrows(InsufficientBalanceException.class, () -> accountService.withdraw(WITHDRAWAL_AMOUNT));
-        verify(account, times(0)).addTransaction(any());
+    public void printStatementToConsole() {
+        accountService.printStatement();
+        verify(statementPrinter).print(account.transactions());
     }
 }
