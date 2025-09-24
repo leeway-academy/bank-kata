@@ -2,10 +2,11 @@ package com.leewayweb.bank;
 
 public class AccountService {
     private final Account account;
-    private final TransactionFactory transactionFactory = new TransactionFactory();
+    private final TransactionFactory transactionFactory;
 
-    public AccountService(Account account) {
+    public AccountService(Account account, TransactionFactory transactionFactory) {
         this.account = account;
+        this.transactionFactory = transactionFactory;
     }
 
     public void deposit(int amount) {
