@@ -5,7 +5,9 @@ import com.leewayweb.bank.Console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,11 +32,11 @@ public class PrintStatementFeature {
 
         accountService.printStatement();
 
-        verify(console).printLine("DATE | AMOUNT | BALANCE");
-        verify(console).printLine("10/04/2020 | 500.00 | 1400.00");
-        verify(console).printLine("02/04/2020 | -100.00 | 900.00");
-        verify(console).printLine("01/04/2020 | 1000.00 | 1000.00");
+        InOrder inOrder = Mockito.inOrder(console);
 
-        assertTrue(true);
+        inOrder.verify(console).printLine("DATE | AMOUNT | BALANCE");
+        inOrder.verify(console).printLine("10/04/2020 | 500.00 | 1400.00");
+        inOrder.verify(console).printLine("02/04/2020 | -100.00 | 900.00");
+        inOrder.verify(console).printLine("01/04/2020 | 1000.00 | 1000.00");
     }
 }
