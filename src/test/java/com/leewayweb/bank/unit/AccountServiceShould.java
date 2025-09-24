@@ -28,8 +28,7 @@ class AccountServiceShould {
     private @Mock StatementPrinter statementPrinter;
 
     @BeforeEach
-    public void setUp()
-    {
+    public void setUp() {
         accountService = new AccountService(account, transactionFactory, statementPrinter);
     }
 
@@ -48,7 +47,6 @@ class AccountServiceShould {
         when(transactionFactory.buildTransaction(WITHDRAWAL_AMOUNT * -1))
                 .thenReturn(A_WITHDRAWAL);
 
-        when(account.balance()).thenReturn(WITHDRAWAL_AMOUNT + 100);
         accountService.withdraw(WITHDRAWAL_AMOUNT);
 
         verify(account).addTransaction(eq(A_WITHDRAWAL));
