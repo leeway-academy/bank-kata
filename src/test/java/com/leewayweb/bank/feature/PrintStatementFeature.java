@@ -1,8 +1,6 @@
 package com.leewayweb.bank.feature;
 
-import com.leewayweb.bank.Account;
-import com.leewayweb.bank.AccountService;
-import com.leewayweb.bank.Console;
+import com.leewayweb.bank.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +16,7 @@ public class PrintStatementFeature {
 
     @BeforeEach
     void setUp() {
-        accountService = new AccountService(new Account());
+        accountService = new AccountService(new Account(), new TransactionFactory(new Clock()));
     }
 
     @Test
