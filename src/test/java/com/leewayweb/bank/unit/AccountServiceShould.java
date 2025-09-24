@@ -14,6 +14,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class AccountServiceShould {
+    public static final int DEPOSIT_AMOUNT = 400;
     private @Mock Account account;
     private AccountService accountService;
 
@@ -25,9 +26,9 @@ class AccountServiceShould {
 
     @Test
     public void shouldAllowDeposits() {
-        Transaction aDeposit = new Transaction(400);
+        Transaction aDeposit = new Transaction(DEPOSIT_AMOUNT);
 
-        accountService.deposit(400);
+        accountService.deposit(DEPOSIT_AMOUNT);
 
         verify(account).addTransaction(eq(aDeposit));
     }
