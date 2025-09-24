@@ -4,7 +4,7 @@ public class TransactionFactory {
     public TransactionFactory() {
     }
 
-    Transaction buildTransaction(int amount) {
+    public Transaction buildTransaction(int amount) {
         return new Transaction(amount);
     }
 }
