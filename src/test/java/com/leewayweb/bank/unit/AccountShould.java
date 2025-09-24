@@ -1,5 +1,7 @@
-package com.leewayweb.bank;
+package com.leewayweb.bank.unit;
 
+import com.leewayweb.bank.Account;
+import com.leewayweb.bank.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
