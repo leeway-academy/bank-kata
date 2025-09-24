@@ -4,6 +4,7 @@ import com.leewayweb.bank.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -23,14 +24,10 @@ class AccountServiceShould {
     private static final Transaction A_WITHDRAWAL = new Transaction(WITHDRAWAL_AMOUNT * -1, WITHDRAWAL_DATE);
 
     private @Mock Account account;
-    private AccountService accountService;
     private @Mock TransactionFactory transactionFactory;
     private @Mock StatementPrinter statementPrinter;
-
-    @BeforeEach
-    public void setUp() {
-        accountService = new AccountService(account, transactionFactory, statementPrinter);
-    }
+    @InjectMocks
+    private AccountService accountService;
 
     @Test
     public void shouldAllowDeposits() {
