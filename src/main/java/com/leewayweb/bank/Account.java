@@ -13,8 +13,4 @@ public class Account {
     public List<Transaction> transactions() {
         return this.transactions;
     }
-
-    public int balance() {
-        throw new UnsupportedOperationException("balance not yet implemented");
-    }
 }
