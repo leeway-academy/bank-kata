@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InOrder;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,15 +25,11 @@ class StatementPrinterShould {
     public static final String WITHDRAWAL_LINE = "22/12/1978 | -50 | 50";
     public static final String DEPOSIT_LINE = "22/12/1977 | 100 | 100";
     private @Mock Console console;
+    @InjectMocks
     private StatementPrinter printer;
 
     private static final Transaction A_DEPOSIT = new Transaction(100, "22/12/1977");
     private static final Transaction A_WITHDRAWAL = new Transaction(-50, "22/12/1978");
-
-    @BeforeEach
-    void setUp() {
-        printer = new StatementPrinter(console);
-    }
 
     @ParameterizedTest
     @MethodSource("provider")
