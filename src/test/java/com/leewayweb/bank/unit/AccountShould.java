@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AccountShould {
     private static final Transaction A_TRANSACTION = new Transaction(90, "07/04/2023");
@@ -23,7 +22,7 @@ class AccountShould {
     @Test
     public void keepTrackOfItsTransactions() {
         account.addTransaction(A_TRANSACTION);
-        List transactions = account.transactions();
+        List<Transaction> transactions = account.transactions();
 
         assertEquals(1, transactions.size());
         assertEquals(A_TRANSACTION, transactions.getFirst());
