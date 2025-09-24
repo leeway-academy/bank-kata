@@ -1,5 +1,6 @@
 package com.leewayweb.bank.feature;
 
+import com.leewayweb.bank.Account;
 import com.leewayweb.bank.AccountService;
 import com.leewayweb.bank.Console;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-
 @ExtendWith(MockitoExtension.class)
 public class PrintStatementFeature {
     @Mock Console console;
@@ -20,7 +18,7 @@ public class PrintStatementFeature {
 
     @BeforeEach
     void setUp() {
-        accountService = new AccountService();
+        accountService = new AccountService(new Account());
     }
 
     @Test

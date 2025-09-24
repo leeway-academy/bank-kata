@@ -1,6 +1,9 @@
 package com.leewayweb.bank;
 
 public class AccountService {
+    public AccountService(Account account) {
+    }
+
     public void deposit(int amount) {
 
     }
