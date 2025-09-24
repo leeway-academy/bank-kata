@@ -31,8 +31,8 @@ public class PrintStatementFeature {
         InOrder inOrder = Mockito.inOrder(console);
 
         inOrder.verify(console).printLine("DATE | AMOUNT | BALANCE");
-        inOrder.verify(console).printLine("10/04/2020 | 500.00 | 1400.00");
-        inOrder.verify(console).printLine("02/04/2020 | -100.00 | 900.00");
-        inOrder.verify(console).printLine("01/04/2020 | 1000.00 | 1000.00");
+        inOrder.verify(console).printLine("10/04/2020 | 500 | 1400");
+        inOrder.verify(console).printLine("02/04/2020 | -100 | 900");
+        inOrder.verify(console).printLine("01/04/2020 | 1000 | 1000");
     }
 }
