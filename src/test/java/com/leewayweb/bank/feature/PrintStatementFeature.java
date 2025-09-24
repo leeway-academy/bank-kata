@@ -9,14 +9,24 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class PrintStatementFeature {
     @Mock Console console;
+    @Mock Clock clock;
     private AccountService accountService;
 
     @BeforeEach
     void setUp() {
-        accountService = new AccountService(new Account(), new TransactionFactory(new Clock()));
+        when(clock.date())
+                .thenReturn("01/04/2020", "02/04/2020", "10/04/2020");
+
+        accountService = new AccountService(
+                new Account(),
+                new TransactionFactory(clock),
+                new StatementPrinter(console)
+        );
     }
 
     @Test
