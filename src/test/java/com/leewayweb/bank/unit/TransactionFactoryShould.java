@@ -3,9 +3,10 @@ package com.leewayweb.bank.unit;
 import com.leewayweb.bank.Clock;
 import com.leewayweb.bank.Transaction;
 import com.leewayweb.bank.TransactionFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -15,21 +16,19 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TransactionFactoryShould {
 
-    private static final int AMOUNT = 500;
-    public static final String TODAY = "09/25/2025";
-    private TransactionFactory factory;
     private @Mock Clock clock;
 
-    @BeforeEach
-    void setUp() {
-        this.factory = new TransactionFactory(clock);
-    }
+    @InjectMocks
+    private TransactionFactory factory;
 
-    @Test
-    public void buildTransactions() {
-        Transaction aTransaction = new Transaction(AMOUNT, TODAY);
-        when(clock.date()).thenReturn(TODAY);
+    @ParameterizedTest
+    @CsvSource({
+            "10/05/2019,500",
+            "12/31/2017,-300",
+    })
+    public void buildTransactions(String date, int amount) {
+        when(clock.date()).thenReturn(date);
 
-        assertEquals(aTransaction, factory.buildTransaction(AMOUNT));
+        assertEquals(new Transaction(amount, date), factory.buildTransaction(amount));
     }
 }
