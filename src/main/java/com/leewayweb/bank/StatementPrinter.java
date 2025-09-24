@@ -27,17 +27,22 @@ public class StatementPrinter {
     }
 
     private void printTransactions(List<Transaction> transactions) {
-        int balance = 0;
 
-        ArrayList<String> lines = new ArrayList<>();
-
-        for (Transaction t : sort(transactions)) {
-            balance += t.amount();
-            lines.add(formatTransaction(t, balance));
-        }
-        for (String line : lines.reversed()) {
+        for (String line : buildStatementLines(transactions).reversed()) {
             console.printLine(line);
         }
+    }
+
+    private static ArrayList<String> buildStatementLines(List<Transaction> transactions) {
+        ArrayList<String> lines = new ArrayList<>();
+        int balance = 0;
+
+        for (Transaction transaction : sort(transactions)) {
+            balance += transaction.amount();
+            lines.add(format(transaction, balance));
+        }
+
+        return lines;
     }
 
     private static List<Transaction> sort(List<Transaction> transactions) {
@@ -50,7 +55,7 @@ public class StatementPrinter {
                 ;
     }
 
-    private static String formatTransaction(Transaction t, int balance) {
+    private static String format(Transaction t, int balance) {
         return t.date() + SEPARATOR + t.amount() + SEPARATOR + balance;
     }
 }
