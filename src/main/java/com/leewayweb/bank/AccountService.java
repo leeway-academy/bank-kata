@@ -12,11 +12,11 @@ public class AccountService {
     }
 
     public void deposit(int amount) {
-        account.addTransaction(transactionFactory.buildTransaction(amount));
+        account.addTransaction(transactionFactory.deposit(amount));
     }
 
     public void withdraw(int amount) {
-        account.addTransaction(transactionFactory.buildTransaction(amount * -1));
+        account.addTransaction(transactionFactory.withdrawal(amount));
     }
 
     public void printStatement() {

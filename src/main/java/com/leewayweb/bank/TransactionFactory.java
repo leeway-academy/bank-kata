@@ -8,8 +8,11 @@ public class TransactionFactory {
         this.clock = clock;
     }
 
-    public Transaction buildTransaction(int amount) {
-
+    public Transaction deposit(int amount) {
         return new Transaction(amount, clock.date());
+    }
+
+    public Transaction withdrawal(int amount) {
+        return new Transaction(-amount, clock.date());
     }
 }

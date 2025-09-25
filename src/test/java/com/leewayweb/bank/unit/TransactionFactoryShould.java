@@ -24,11 +24,20 @@ class TransactionFactoryShould {
     @ParameterizedTest
     @CsvSource({
             "10/05/2019,500",
-            "12/31/2017,-300",
+            "11/06/2019,400",
     })
-    public void buildTransactions(String date, int amount) {
+    public void createDeposits(String date, int amount) {
         when(clock.date()).thenReturn(date);
+        assertEquals(new Transaction(amount, date), factory.deposit(amount));
+    }
 
-        assertEquals(new Transaction(amount, date), factory.buildTransaction(amount));
+    @ParameterizedTest
+    @CsvSource({
+            "10/05/2019,500",
+            "11/06/2019,400",
+    })
+    public void createWithdrawals(String date, int amount) {
+        when(clock.date()).thenReturn(date);
+        assertEquals(new Transaction(-amount, date), factory.withdrawal(amount));
     }
 }

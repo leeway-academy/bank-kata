@@ -21,7 +21,7 @@ class AccountServiceShould {
     private static final String WITHDRAWAL_DATE = "11/10/2021";
 
     private static final Transaction A_DEPOSIT = new Transaction(DEPOSIT_AMOUNT, DEPOSIT_DATE);
-    private static final Transaction A_WITHDRAWAL = new Transaction(WITHDRAWAL_AMOUNT * -1, WITHDRAWAL_DATE);
+    private static final Transaction A_WITHDRAWAL = new Transaction(-WITHDRAWAL_AMOUNT, WITHDRAWAL_DATE);
 
     private @Mock Account account;
     private @Mock TransactionFactory transactionFactory;
@@ -31,7 +31,7 @@ class AccountServiceShould {
 
     @Test
     public void shouldAllowDeposits() {
-        when(transactionFactory.buildTransaction(DEPOSIT_AMOUNT))
+        when(transactionFactory.deposit(DEPOSIT_AMOUNT))
                 .thenReturn(A_DEPOSIT);
 
         accountService.deposit(DEPOSIT_AMOUNT);
@@ -41,7 +41,7 @@ class AccountServiceShould {
 
     @Test
     public void shouldAllowWithdrawals() {
-        when(transactionFactory.buildTransaction(WITHDRAWAL_AMOUNT * -1))
+        when(transactionFactory.withdrawal(WITHDRAWAL_AMOUNT))
                 .thenReturn(A_WITHDRAWAL);
 
         accountService.withdraw(WITHDRAWAL_AMOUNT);
